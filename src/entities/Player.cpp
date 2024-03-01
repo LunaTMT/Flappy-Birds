@@ -25,9 +25,10 @@ void Player::update(float deltaTime) {
 
         // Check if the player is on the ground
         if (shape.getPosition().y + shape.getSize().y >= SCREEN_HEIGHT) {
-            shape.setPosition(shape.getPosition().x, SCREEN_HEIGHT - shape.getSize().y);
+
+            //shape.setPosition(shape.getPosition().x, SCREEN_HEIGHT - shape.getSize().y);
             velocityY = 0.0f;  // Reset velocity when on the ground
-            canJump = true;    // Allow jumping when on the ground
+            isAlive = false;
         }
 
         // Handle jumping
@@ -65,6 +66,18 @@ bool Player::collidesWith(const Obstacle& obstacle) const {
 }
 
 
+bool Player::getIsAlive() const{
+    return isAlive;
+}
+
 void Player::setColour(const sf::Color& colour) {
     shape.setFillColor(colour);
+}
+
+void Player::kill(){
+    isAlive = false;
+}
+
+void Player::disableJumping(){
+    canJump=false;
 }

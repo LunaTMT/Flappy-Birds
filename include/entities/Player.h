@@ -10,8 +10,6 @@ class Player {
 public:
     Player(float initialX, float initialY);
 
-    bool isAlive;    
-
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
 
@@ -20,7 +18,13 @@ public:
     bool collidesWith(const sf::FloatRect& rect) const; 
     bool collidesWith(const Obstacle& obstacle) const;
     
+    bool getIsAlive() const;
+
     void setColour(const sf::Color& colour);    
+    void kill();
+    void disableJumping();
+
+    
 
 private:
     sf::RectangleShape shape;
@@ -30,6 +34,7 @@ private:
     const float jumpStrength;
     bool isJumpKeyPressed;
     bool canJump;
+    bool isAlive;  
     
 };
 

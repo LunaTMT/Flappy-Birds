@@ -47,11 +47,14 @@ int main() {
         for (Obstacle& obstacle : obstaclesQueue) {
             obstacle.update(dtSeconds);
 
-            if (bird.collidesWith(obstacle)) {
-                bird.setColour(sf::Color::Red);
-                bird.isAlive = false;
-                stopObstacleMovement(obstaclesQueue);
-            }
+            if (bird.collidesWith(obstacle)) 
+                bird.kill();
+            
+        }
+
+        if (!bird.getIsAlive()){
+            bird.setColour(sf::Color::Red);
+            stopObstacleMovement(obstaclesQueue);
         }
 
         // --------------------------------------
