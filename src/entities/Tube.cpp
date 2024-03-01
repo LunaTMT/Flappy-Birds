@@ -21,7 +21,10 @@ void Tube::move(float deltaX, float deltaY) {
 sf::Vector2f Tube::getPosition() const {
     return position;
 }
-
 sf::Vector2f Tube::getSize() const {
     return size;
+}
+
+sf::FloatRect Tube::getBoundingBox() const {
+    return sf::FloatRect(position, size);
 }

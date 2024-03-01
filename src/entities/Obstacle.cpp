@@ -20,3 +20,8 @@ void Obstacle::draw(sf::RenderWindow& window) {
 bool Obstacle::isOutOfBounds() const {
     return bottom_tube->getPosition().x + bottom_tube->getSize().x < 0;
 }
+
+
+std::pair<sf::FloatRect, sf::FloatRect> Obstacle::getBoundingBoxes() const {
+    return std::make_pair(bottom_tube->getBoundingBox(), top_tube->getBoundingBox());
+}

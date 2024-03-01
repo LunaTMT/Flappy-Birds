@@ -39,11 +39,18 @@ void Player::update(float deltaTime) {
         canJump = true; // Allow jumping again when the space key is released
     }
 }
-
-void Player::jump() {
-    velocityY = jumpStrength;
-}
-
 void Player::draw(sf::RenderWindow& window) {
     window.draw(shape);
+}
+
+void Player::jump() { velocityY = jumpStrength; }
+
+
+sf::FloatRect Player::getBoundingBox() const {
+    return shape.getGlobalBounds();
+}
+
+
+bool Player::collidesWith(const sf::FloatRect& otherBoundingBox) const {
+    return getBoundingBox().intersects(otherBoundingBox);
 }

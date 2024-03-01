@@ -9,9 +9,13 @@ public:
     Player(float initialX, float initialY);
 
     void update(float deltaTime);
+    void draw(sf::RenderWindow& window);
+
     void jump();
 
-    void draw(sf::RenderWindow& window);
+    sf::FloatRect getBoundingBox() const;
+
+    bool collidesWith(const sf::FloatRect& BoundingBox) const;
 
 private:
     sf::RectangleShape shape;

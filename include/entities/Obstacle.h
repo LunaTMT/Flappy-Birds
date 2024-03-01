@@ -13,7 +13,10 @@ public:
 
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
+    
     bool isOutOfBounds() const;
+
+    std::pair<sf::FloatRect, sf::FloatRect> getBoundingBoxes() const;
 
 private:
     std::shared_ptr<Tube> bottom_tube;
