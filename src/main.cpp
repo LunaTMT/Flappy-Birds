@@ -1,5 +1,6 @@
 #include "EmptyClass.h"
 #include "Tube.h"
+#include "Obstacle.h"
 
 #include <iostream>
 
@@ -8,17 +9,33 @@ using namespace std;
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Tube Example");
 
-    EmptyClass emptyObject;
-    Tube Obstacle1(100.0f, 450.0f, 50.0f, 50.0f, sf::Color::Blue);
-    cout << "import successful";
+    // Create an instance of the derived class
+    Obstacle Obstacle1(100.0f, 450.0f);
+    Obstacle Obstacle2(200.0f, 460.0f);
+    Obstacle Obstacle3(300.0f, 470.0f);
+    Obstacle Obstacle4(400.0f, 480.0f);
 
-    cout << "import successful";
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
 
-    cout << "import successful";
+        window.clear();
 
-    cout << "import successful";
-    Obstacle1.draw(window);
+        // Draw the tube (which is also an obstacle)
+        Obstacle1.draw(window);
+        Obstacle2.draw(window);
+        Obstacle3.draw(window);
+        Obstacle4.draw(window);
+
+        window.display();
+    }
+
     return 0;
 }
+
 
 
