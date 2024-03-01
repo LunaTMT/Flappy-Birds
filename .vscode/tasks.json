@@ -1,5 +1,3 @@
-
-
 {
     "version": "2.0.0",
     "tasks": [
@@ -9,8 +7,10 @@
             "command": "g++",
             "args": [
                 "-g",
-                "src/*.cpp",     //
-                "-Iinclude",     // Include the include folder
+                "src/*.cpp",
+                "src/entities/*.cpp",     
+                "-Iinclude",
+                "-Iinclude/entities",     
                 "-o",
                 "bin/main",
                 "-lsfml-graphics",
