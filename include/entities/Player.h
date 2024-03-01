@@ -13,18 +13,21 @@ public:
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
 
-    void jump();
-
+    
     bool collidesWith(const sf::FloatRect& rect) const; 
     bool collidesWith(const Obstacle& obstacle) const;
     
-    bool getIsAlive() const;
-
-    void setColour(const sf::Color& colour);    
-    void kill();
-    void disableJumping();
-
+    void checkIfTouchingGround();
+    void checkIfTouchingTop();
+    void checkJump();
     
+    bool getIsAlive() const;
+    
+    void setColour(const sf::Color& colour);    
+    
+    void kill();
+    void jump();
+
 
 private:
     sf::RectangleShape shape;

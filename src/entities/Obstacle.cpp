@@ -5,7 +5,9 @@
 Obstacle::Obstacle(float x, float y)
     : bottom_tube(std::make_shared<Tube>(x, y, TUBE_WIDTH, SCREEN_HEIGHT - y, sf::Color::Blue)),
       top_tube   (std::make_shared<Tube>(x, 0, TUBE_WIDTH, y - 200,           sf::Color::Red)),
-      velocityX(-100.0f) {}
+      velocityX(-100.0f) {
+        isMoving = true;
+      }
 
 void Obstacle::update(float deltaTime) {
     if (isMoving){
