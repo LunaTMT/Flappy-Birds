@@ -48,7 +48,7 @@ void Game::update(float deltaTime) {
     for (Obstacle& obstacle : obstaclesQueue) {
         if (obstacle.isOutOfBounds()) {
             obstaclesQueue.pop_front();
-            obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(150, SCREEN_HEIGHT - 150));
+            obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(50, SCREEN_HEIGHT - 50));
         }
     }
 }
@@ -64,8 +64,8 @@ void Game::render() {
 }
 
 void Game::initialiseObstacles() {
-    obstaclesQueue.emplace_back(100.0f + SCREEN_WIDTH, 250.0f);
-    obstaclesQueue.emplace_back(300.0f + SCREEN_WIDTH, 300.0f);
-    obstaclesQueue.emplace_back(500.0f + SCREEN_WIDTH, 350.0f);
-    obstaclesQueue.emplace_back(700.0f + SCREEN_WIDTH, 250.0f);
+    obstaclesQueue.emplace_back(100.0f + SCREEN_WIDTH, CENTER_Y);
+    obstaclesQueue.emplace_back(300.0f + SCREEN_WIDTH, CENTER_Y + 50.0f);
+    obstaclesQueue.emplace_back(500.0f + SCREEN_WIDTH, CENTER_Y - 50.0f);
+    obstaclesQueue.emplace_back(700.0f + SCREEN_WIDTH, CENTER_Y);
 }

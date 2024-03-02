@@ -21,8 +21,9 @@ public:
     std::pair<sf::FloatRect, sf::FloatRect> getBoundingBoxes() const;
 
 private:
-    std::shared_ptr<Tube> bottom_tube;
     std::shared_ptr<Tube> top_tube;
+    std::shared_ptr<Tube> bottom_tube;
+    
     float velocityX;
 
     bool isMoving;

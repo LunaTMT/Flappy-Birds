@@ -52,6 +52,7 @@ bool Player::collidesWith(const Obstacle& obstacle) const {
 void Player::checkIfTouchingGround() {
     if (shape.getPosition().y + shape.getSize().y >= SCREEN_HEIGHT) {
         setColour(sf::Color::Red);
+        setPosition(sf::Vector2f(shape.getPosition().x, SCREEN_HEIGHT - shape.getSize().y));
         kill();
         velocityY = 0.0f;  // Reset velocity when on the ground
         game->stopObstacleMovement();  // Access the Game class function
@@ -94,6 +95,10 @@ void Player::setColour(const sf::Color& colour) {
 
 void Player::sethasCollidedWithObstacle(bool boolean){
     hasCollidedWithObstacle = boolean;
+}
+
+void Player::setPosition(sf::Vector2f vector) {
+    shape.setPosition(vector);
 }
 
 void Player::kill() {

@@ -31,6 +31,7 @@ public:
 
     void setColour(const sf::Color& colour);
     void sethasCollidedWithObstacle(bool boolean);
+    void setPosition(sf::Vector2f vector);
 
     void kill();
     void jump();
