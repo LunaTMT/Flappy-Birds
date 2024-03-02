@@ -1,22 +1,26 @@
 #include "Player.h"
 #include "Obstacle.h"
+#include "game.h"  // Include the header file for Game
 #include "globals.h"
 #include <iostream>
 
-Player::Player(float initialX, float initialY) : jumpStrength(-400.0f) {
+
+
+Player::Player(float initialX, float initialY, Game& game) : jumpStrength(-400.0f), game(&game) {
     shape.setSize(sf::Vector2f(50, 50));
     shape.setPosition(initialX, initialY);
     shape.setFillColor(sf::Color::Green);
 
-
     velocityY = 0.0f;
     accelerationY = 1500.0f;
     isJumpKeyPressed = false;
+    canJump = true;
     isAlive = true;
 }
 
+
 void Player::update(float deltaTime) {
-    if (isAlive){
+    if (isAlive) {
         // Apply gravity
         velocityY += accelerationY * deltaTime;
 
@@ -33,9 +37,6 @@ void Player::draw(sf::RenderWindow& window) {
     window.draw(shape);
 }
 
-
-
-
 bool Player::collidesWith(const sf::FloatRect& rect) const {
     return shape.getGlobalBounds().intersects(rect);
 }
@@ -47,23 +48,22 @@ bool Player::collidesWith(const Obstacle& obstacle) const {
     return collidesWith(BB) || collidesWith(TB);
 }
 
-
-
-void Player::checkIfTouchingGround(){
+void Player::checkIfTouchingGround() {
     if (shape.getPosition().y + shape.getSize().y >= SCREEN_HEIGHT) {
         setColour(sf::Color::Red);
         kill();
         velocityY = 0.0f;  // Reset velocity when on the ground
+        game->stopObstacleMovement();  // Access the Game class function
     }
 }
 
-void Player::checkIfTouchingTop(){
+void Player::checkIfTouchingTop() {
     float y = shape.getPosition().y;
     if (y < 0)
         shape.move(0, -y);
 }
 
-void Player::checkJump(){
+void Player::checkJump() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         if (!isJumpKeyPressed && canJump) {
             jump();
@@ -72,28 +72,22 @@ void Player::checkJump(){
         }
     } else {
         isJumpKeyPressed = false;
-        canJump = true; // Allow jumping again when the space key is released
+        canJump = true;  // Allow jumping again when the space key is released
     }
 }
 
-
-
-bool Player::getIsAlive() const{
+bool Player::getIsAlive() const {
     return isAlive;
 }
-
 
 void Player::setColour(const sf::Color& colour) {
     shape.setFillColor(colour);
 }
 
-
-
-void Player::kill(){
+void Player::kill() {
     isAlive = false;
 }
 
 void Player::jump() {
     velocityY = jumpStrength;
 }
-

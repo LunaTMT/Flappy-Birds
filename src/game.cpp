@@ -1,7 +1,7 @@
 #include "game.h"
 #include <iostream>
 
-Game::Game() : window(sf::VideoMode(800, 600), "SFML Tube Example"), bird(CENTER_X, CENTER_Y) {
+Game::Game() : window(sf::VideoMode(800, 600), "SFML Tube Example"), bird(CENTER_X, CENTER_Y, *this) {
     initialiseObstacles();
 }
 
@@ -12,6 +12,12 @@ void Game::run() {
         handleEvents();
         update(clock.restart().asSeconds());
         render();
+    }
+}
+
+void Game::stopObstacleMovement() {
+    for (Obstacle& obstacle : obstaclesQueue) {
+        obstacle.stopMoving();
     }
 }
 
@@ -40,7 +46,6 @@ void Game::update(float deltaTime) {
 
     for (Obstacle& obstacle : obstaclesQueue) {
         if (obstacle.isOutOfBounds()) {
-            std::cout << "OOB";
             obstaclesQueue.pop_front();
             obstaclesQueue.emplace_back(SCREEN_WIDTH + 50, getRandomInt(150, SCREEN_HEIGHT - 150));
         }
@@ -49,8 +54,6 @@ void Game::update(float deltaTime) {
 
 void Game::render() {
     window.clear();
-
-    
 
     for (Obstacle& obstacle : obstaclesQueue) {
         obstacle.draw(window);
@@ -64,12 +67,6 @@ void Game::render() {
 
 
 
-
-void Game::stopObstacleMovement() {
-    for (Obstacle& obstacle : obstaclesQueue) {
-        obstacle.stopMoving();
-    }
-}
 
 void Game::initialiseObstacles() {
     obstaclesQueue.emplace_back(100.0f + SCREEN_WIDTH, 250.0f);

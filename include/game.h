@@ -12,15 +12,15 @@
 class Game {
 public:
     Game();
-
     void run();
+    void stopObstacleMovement();
 
 private:
     void handleEvents();
     void update(float deltaTime);
     void render();
 
-    void stopObstacleMovement();
+    
     void initialiseObstacles();
 
 private:
