@@ -21,8 +21,10 @@ private:
     void render();
 
     int score;    
-    void initialiseObstacles();
 
+    void clearObstacles();
+    void initialiseObstacles();
+    
 private:
     Player bird;
     std::deque<Obstacle> obstaclesQueue;

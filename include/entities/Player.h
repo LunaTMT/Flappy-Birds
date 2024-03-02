@@ -13,7 +13,8 @@ class Player {
 public:
 
     // Updated constructor with a reference to the Game class
-    Player(float initialX, float initialY, Game& game);
+    Player(Game& game);
+
 
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
@@ -33,7 +34,10 @@ public:
     void setColour(const sf::Color& colour);
     void sethasCollidedWithObstacle(bool boolean);
     void setPosition(sf::Vector2f vector);
+    void setDefaultPosition();
+    void setDefaultColour();
 
+    void revive();
     void kill();
     void jump();
 

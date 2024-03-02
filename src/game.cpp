@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-Game::Game() : window(sf::VideoMode(600, 600), "SFML Tube Example"), bird(CENTER_X, CENTER_Y, *this) {
+Game::Game() : window(sf::VideoMode(600, 600), "SFML Tube Example"), bird(*this) {
     initialiseObstacles();
 
     if (!font.loadFromFile("assets/fonts/score.ttf")) {
@@ -39,10 +39,20 @@ void Game::handleEvents() {
         if (event.type == sf::Event::Closed) {
             window.close();
         }
+
+        if (!bird.getIsAlive() && (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))){
+            bird.setDefaultPosition();
+            bird.revive();
+            clearObstacles();
+            initialiseObstacles();
+
+        }
+
     }
 }
 
 void Game::update(float deltaTime) {
+
     bird.update(deltaTime);
 
     for (Obstacle& obstacle : obstaclesQueue) {
@@ -79,6 +89,11 @@ void Game::render() {
     bird.draw(window);
     window.draw(score_text);
     window.display();
+}
+
+
+void Game::clearObstacles(){
+    obstaclesQueue.clear();
 }
 
 void Game::initialiseObstacles() {

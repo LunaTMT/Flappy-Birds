@@ -6,10 +6,10 @@
 
 
 
-Player::Player(float initialX, float initialY, Game& game) : jumpStrength(-400.0f), game(&game) {
+Player::Player(Game& game) : jumpStrength(-400.0f), game(&game) {
     shape.setSize(sf::Vector2f(50, 50));
-    shape.setPosition(initialX - getSize().x / 2, initialY - getSize().y / 2);
-    shape.setFillColor(sf::Color::Green);
+    setDefaultPosition();
+    setDefaultColour();
 
     velocityY = 0.0f;
     accelerationY = 1500.0f;
@@ -101,8 +101,23 @@ void Player::setPosition(sf::Vector2f vector) {
     shape.setPosition(vector);
 }
 
+void Player::setDefaultPosition(){
+    shape.setPosition(CENTER_X - getSize().x / 2, CENTER_Y - getSize().y / 2);
+}
+
+void Player::setDefaultColour(){
+    shape.setFillColor(sf::Color::Green);
+}
+
 sf::Vector2f Player::getPosition() const{
     return shape.getPosition();
+}
+
+void Player::revive(){
+    isAlive = true;
+    canJump = true;
+    hasCollidedWithObstacle = false;
+    setDefaultColour();
 }
 
 void Player::kill() {
