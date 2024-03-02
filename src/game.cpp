@@ -1,7 +1,7 @@
 #include "game.h"
 #include <iostream>
 
-Game::Game() : window(sf::VideoMode(800, 600), "SFML Tube Example"), bird(CENTER_X, CENTER_Y, *this) {
+Game::Game() : window(sf::VideoMode(600, 600), "SFML Tube Example"), bird(CENTER_X, CENTER_Y, *this) {
     initialiseObstacles();
 }
 
@@ -38,6 +38,7 @@ void Game::update(float deltaTime) {
 
         if (bird.collidesWith(obstacle)) {
             bird.setColour(sf::Color::Red);
+            bird.sethasCollidedWithObstacle(true);
             stopObstacleMovement();
         }
     }
@@ -47,7 +48,7 @@ void Game::update(float deltaTime) {
     for (Obstacle& obstacle : obstaclesQueue) {
         if (obstacle.isOutOfBounds()) {
             obstaclesQueue.pop_front();
-            obstaclesQueue.emplace_back(SCREEN_WIDTH + 50, getRandomInt(150, SCREEN_HEIGHT - 150));
+            obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(150, SCREEN_HEIGHT - 150));
         }
     }
 }
@@ -55,22 +56,16 @@ void Game::update(float deltaTime) {
 void Game::render() {
     window.clear();
 
-    for (Obstacle& obstacle : obstaclesQueue) {
+    for (Obstacle& obstacle : obstaclesQueue) 
         obstacle.draw(window);
-    }
-
-    // Draw game elements...
+    
     bird.draw(window);
-
     window.display();
 }
-
-
-
 
 void Game::initialiseObstacles() {
     obstaclesQueue.emplace_back(100.0f + SCREEN_WIDTH, 250.0f);
     obstaclesQueue.emplace_back(300.0f + SCREEN_WIDTH, 300.0f);
-    obstaclesQueue.emplace_back(500.0f + SCREEN_WIDTH, 450.0f);
-    obstaclesQueue.emplace_back(700.0f + SCREEN_WIDTH, 500.0f);
+    obstaclesQueue.emplace_back(500.0f + SCREEN_WIDTH, 350.0f);
+    obstaclesQueue.emplace_back(700.0f + SCREEN_WIDTH, 250.0f);
 }

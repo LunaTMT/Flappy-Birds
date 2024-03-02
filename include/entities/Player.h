@@ -25,9 +25,12 @@ public:
     void checkIfTouchingTop();
     void checkJump();
 
-    bool getIsAlive() const;
+    bool getIsAlive() const; 
+    sf::Vector2f getSize() const;
+
 
     void setColour(const sf::Color& colour);
+    void sethasCollidedWithObstacle(bool boolean);
 
     void kill();
     void jump();
@@ -41,6 +44,7 @@ private:
     bool isJumpKeyPressed;
     bool canJump;
     bool isAlive;
+    bool hasCollidedWithObstacle;
 
     // Reference to the Game class
     Game* game;

@@ -8,7 +8,7 @@
 
 Player::Player(float initialX, float initialY, Game& game) : jumpStrength(-400.0f), game(&game) {
     shape.setSize(sf::Vector2f(50, 50));
-    shape.setPosition(initialX, initialY);
+    shape.setPosition(initialX - getSize().x / 2, initialY - getSize().y / 2);
     shape.setFillColor(sf::Color::Green);
 
     velocityY = 0.0f;
@@ -16,6 +16,7 @@ Player::Player(float initialX, float initialY, Game& game) : jumpStrength(-400.0
     isJumpKeyPressed = false;
     canJump = true;
     isAlive = true;
+    hasCollidedWithObstacle = false;
 }
 
 
@@ -64,15 +65,17 @@ void Player::checkIfTouchingTop() {
 }
 
 void Player::checkJump() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        if (!isJumpKeyPressed && canJump) {
-            jump();
-            isJumpKeyPressed = true;
-            canJump = false;
+    if (!hasCollidedWithObstacle){
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            if (!isJumpKeyPressed && canJump) {
+                jump();
+                isJumpKeyPressed = true;
+                canJump = false;
+            }
+        } else {
+            isJumpKeyPressed = false;
+            canJump = true;  
         }
-    } else {
-        isJumpKeyPressed = false;
-        canJump = true;  // Allow jumping again when the space key is released
     }
 }
 
@@ -80,8 +83,17 @@ bool Player::getIsAlive() const {
     return isAlive;
 }
 
+sf::Vector2f Player::getSize() const {
+    return shape.getSize();
+}
+
+
 void Player::setColour(const sf::Color& colour) {
     shape.setFillColor(colour);
+}
+
+void Player::sethasCollidedWithObstacle(bool boolean){
+    hasCollidedWithObstacle = boolean;
 }
 
 void Player::kill() {
