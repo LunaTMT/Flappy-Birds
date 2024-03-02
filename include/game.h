@@ -20,13 +20,16 @@ private:
     void update(float deltaTime);
     void render();
 
-    
+    int score;    
     void initialiseObstacles();
 
 private:
     Player bird;
     std::deque<Obstacle> obstaclesQueue;
     sf::RenderWindow window;
+
+    sf::Font font;
+    sf::Text score_text;
 };
 
 #endif // GAME_H

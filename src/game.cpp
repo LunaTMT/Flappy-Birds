@@ -1,8 +1,20 @@
 #include "game.h"
 #include <iostream>
+#include <string>
 
 Game::Game() : window(sf::VideoMode(600, 600), "SFML Tube Example"), bird(CENTER_X, CENTER_Y, *this) {
     initialiseObstacles();
+
+    if (!font.loadFromFile("assets/fonts/score.ttf")) {
+        std::cout << "ERROR NO FONT";
+    }
+    
+    score = 0;
+    score_text.setFont(font);
+    score_text.setString(std::to_string(score));
+    score_text.setCharacterSize(64);
+    score_text.setFillColor(sf::Color::White);
+    score_text.setPosition((SCREEN_WIDTH - score_text.getLocalBounds().width) / 2.0f, 50);
 }
 
 void Game::run() {
@@ -42,15 +54,16 @@ void Game::update(float deltaTime) {
             stopObstacleMovement();
         }
     }
-
-    // Additional game logic...
-
     for (Obstacle& obstacle : obstaclesQueue) {
         if (obstacle.isOutOfBounds()) {
             obstaclesQueue.pop_front();
             obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(50, SCREEN_HEIGHT - 50));
         }
     }
+
+    //updating score position and value
+    score_text.setString(std::to_string(score));
+    score_text.setPosition((SCREEN_WIDTH - score_text.getLocalBounds().width) / 2.0f, 50);
 }
 
 void Game::render() {
@@ -60,6 +73,7 @@ void Game::render() {
         obstacle.draw(window);
     
     bird.draw(window);
+    window.draw(score_text);
     window.display();
 }
 
