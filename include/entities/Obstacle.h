@@ -13,15 +13,24 @@ public:
 
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
-    
-    bool isOutOfBounds() const;
+    void stopMoving();
 
+    bool beenPassed;
+    bool isOutOfBounds() const;
+    
+    
     std::pair<sf::FloatRect, sf::FloatRect> getBoundingBoxes() const;
+    sf::Vector2f getPosition() const;
+
+
 
 private:
-    std::shared_ptr<Tube> bottom_tube;
     std::shared_ptr<Tube> top_tube;
+    std::shared_ptr<Tube> bottom_tube;
+    
     float velocityX;
+    bool isMoving;
+    
 };
 
 #endif // OBSTACLE_H
