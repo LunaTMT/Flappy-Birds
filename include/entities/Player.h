@@ -27,6 +27,7 @@ public:
 
     bool getIsAlive() const; 
     sf::Vector2f getSize() const;
+    sf::Vector2f getPosition() const;
 
 
     void setColour(const sf::Color& colour);

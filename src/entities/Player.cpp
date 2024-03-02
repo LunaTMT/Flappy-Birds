@@ -101,6 +101,10 @@ void Player::setPosition(sf::Vector2f vector) {
     shape.setPosition(vector);
 }
 
+sf::Vector2f Player::getPosition() const{
+    return shape.getPosition();
+}
+
 void Player::kill() {
     isAlive = false;
 }

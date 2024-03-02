@@ -53,8 +53,12 @@ void Game::update(float deltaTime) {
             bird.sethasCollidedWithObstacle(true);
             stopObstacleMovement();
         }
-    }
-    for (Obstacle& obstacle : obstaclesQueue) {
+
+        if (bird.getPosition().x > obstacle.getPosition().x && !obstacle.beenPassed){
+            obstacle.beenPassed = true;
+            score += 1;
+        }
+
         if (obstacle.isOutOfBounds()) {
             obstaclesQueue.pop_front();
             obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(50, SCREEN_HEIGHT - 50));

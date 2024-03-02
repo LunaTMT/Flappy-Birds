@@ -11,7 +11,6 @@ public:
     // Getter methods
     sf::Vector2f getPosition() const;
     sf::Vector2f getSize() const;
-
     sf::FloatRect getBoundingBox() const;
 
 private:

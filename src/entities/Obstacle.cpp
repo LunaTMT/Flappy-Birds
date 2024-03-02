@@ -7,6 +7,7 @@ Obstacle::Obstacle(float x, float y)
       bottom_tube(std::make_shared<Tube>(x, y + HALF_TUBE_GAP, TUBE_WIDTH, SCREEN_HEIGHT - (y + HALF_TUBE_GAP), sf::Color::Blue)),
       velocityX(-100.0f) {
         isMoving = true;
+        beenPassed = false;
       }
 
 void Obstacle::update(float deltaTime) {
@@ -36,3 +37,8 @@ std::pair<sf::FloatRect, sf::FloatRect> Obstacle::getBoundingBoxes() const {
     return std::make_pair(bottomBoundingBox, topBoundingBox);
 }
 
+
+
+sf::Vector2f Obstacle::getPosition() const {
+    return top_tube->getPosition();
+}
