@@ -21,9 +21,6 @@ Then based upon your operating system follow the steps below
 `./build.sh`
 
 ## Demonstration
-
-Brief demonstration of current working implementation
-
 https://github.com/LunaTMT/Flappy-Birds/assets/44672093/74fb3a89-35ad-4777-8316-26e2b26d8fa6
 
 
