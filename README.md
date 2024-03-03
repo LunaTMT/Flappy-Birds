@@ -24,7 +24,8 @@ Then based upon your operating system follow the steps below
 
 Brief demonstration of current working implementation
 
-https://github.com/LunaTMT/Flappy-Birds/assets/44672093/c7f3386b-11db-408a-9254-2c7c48b5a724
+https://github.com/LunaTMT/Flappy-Birds/assets/44672093/74fb3a89-35ad-4777-8316-26e2b26d8fa6
+
 
 
 
