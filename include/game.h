@@ -24,12 +24,15 @@ private:
 
     void clearObstacles();
     void initialiseObstacles();
+    void initialiseImages();
     
 private:
     Player bird;
     std::deque<Obstacle> obstaclesQueue;
     sf::RenderWindow window;
-
+    
+    sf::Texture backgroundTexture;  // Declare backgroundTexture as a member variable
+    sf::Sprite backgroundSprite;
     sf::Font font;
     sf::Text score_text;
 };

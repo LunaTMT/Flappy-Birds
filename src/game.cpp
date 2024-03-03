@@ -3,6 +3,7 @@
 #include <string>
 
 Game::Game() : window(sf::VideoMode(600, 600), "SFML Tube Example"), bird(*this) {
+    initialiseImages();
     initialiseObstacles();
 
     if (!font.loadFromFile("assets/fonts/score.ttf")) {
@@ -16,6 +17,7 @@ Game::Game() : window(sf::VideoMode(600, 600), "SFML Tube Example"), bird(*this)
     score_text.setFillColor(sf::Color::White);
     score_text.setPosition((SCREEN_WIDTH - score_text.getLocalBounds().width) / 2.0f, 50);
 }
+
 
 void Game::run() {
     sf::Clock clock;
@@ -43,6 +45,7 @@ void Game::handleEvents() {
         if (!bird.getIsAlive() && (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))){
             bird.setDefaultPosition();
             bird.revive();
+            score = 0;
             clearObstacles();
             initialiseObstacles();
 
@@ -83,6 +86,8 @@ void Game::update(float deltaTime) {
 void Game::render() {
     window.clear();
 
+    window.draw(backgroundSprite);
+
     for (Obstacle& obstacle : obstaclesQueue) 
         obstacle.draw(window);
     
@@ -101,4 +106,14 @@ void Game::initialiseObstacles() {
     obstaclesQueue.emplace_back(300.0f + SCREEN_WIDTH, CENTER_Y + 50.0f);
     obstaclesQueue.emplace_back(500.0f + SCREEN_WIDTH, CENTER_Y - 50.0f);
     obstaclesQueue.emplace_back(700.0f + SCREEN_WIDTH, CENTER_Y);
+}
+
+
+void Game::initialiseImages() {
+    // Load Background Image
+    if (!backgroundTexture.loadFromFile("assets/images/background-night.png")) {
+        std::cout << "No background Image";
+    }
+
+    backgroundSprite.setTexture(backgroundTexture);
 }
