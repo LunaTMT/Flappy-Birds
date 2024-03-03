@@ -6,7 +6,6 @@ Tube::Tube(float x, float y, float width, float height, int type)
     : position(x, y), size(width, height)
 {
     sprite.setPosition(position);
-   // sprite.setScale(width / texture.getSize().x, height / texture.getSize().y);
 
     // type 0 bottom tube, type 1 top tube
     std::string file_name = !type ? "top" : "bottom";

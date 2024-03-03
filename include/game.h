@@ -15,7 +15,6 @@ public:
     void run();
     void stopObstacleMovement();
 
-private:
     void handleEvents();
     void update(float deltaTime);
     void render();
@@ -25,14 +24,20 @@ private:
     void clearObstacles();
     void initialiseObstacles();
     void initialiseImages();
+
+    float getBaseHeight();
+
+    sf::Texture baseTexture;
+    sf::Sprite baseSprite;
+
+    sf::Texture backgroundTexture;  
+    sf::Sprite backgroundSprite;
     
 private:
     Player bird;
     std::deque<Obstacle> obstaclesQueue;
     sf::RenderWindow window;
     
-    sf::Texture backgroundTexture;  // Declare backgroundTexture as a member variable
-    sf::Sprite backgroundSprite;
     sf::Font font;
     sf::Text score_text;
 };

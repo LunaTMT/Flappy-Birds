@@ -62,7 +62,6 @@ void Game::update(float deltaTime) {
         obstacle.update(deltaTime);
 
         if (bird.collidesWith(obstacle)) {
-            bird.setColour(sf::Color::Red);
             bird.sethasCollidedWithObstacle(true);
             stopObstacleMovement();
         }
@@ -74,7 +73,7 @@ void Game::update(float deltaTime) {
 
         if (obstacle.isOutOfBounds()) {
             obstaclesQueue.pop_front();
-            obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(100, SCREEN_HEIGHT - 100));
+            obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(100, SCREEN_HEIGHT - getBaseHeight()));
         }
     }
 
@@ -91,8 +90,10 @@ void Game::render() {
     for (Obstacle& obstacle : obstaclesQueue) 
         obstacle.draw(window);
     
+    window.draw(baseSprite);
     bird.draw(window);
     window.draw(score_text);
+    
     window.display();
 }
 
@@ -102,18 +103,30 @@ void Game::clearObstacles(){
 }
 
 void Game::initialiseObstacles() {
-    obstaclesQueue.emplace_back(100.0f + SCREEN_WIDTH, CENTER_Y);
-    obstaclesQueue.emplace_back(300.0f + SCREEN_WIDTH, CENTER_Y + 50.0f);
-    obstaclesQueue.emplace_back(500.0f + SCREEN_WIDTH, CENTER_Y - 50.0f);
-    obstaclesQueue.emplace_back(700.0f + SCREEN_WIDTH, CENTER_Y);
+    obstaclesQueue.emplace_back(100.0f + SCREEN_WIDTH, CENTER_Y         - getBaseHeight()/2);
+    obstaclesQueue.emplace_back(300.0f + SCREEN_WIDTH, CENTER_Y + 50.0f - getBaseHeight()/2);
+    obstaclesQueue.emplace_back(500.0f + SCREEN_WIDTH, CENTER_Y - 50.0f - getBaseHeight()/2);
+    obstaclesQueue.emplace_back(700.0f + SCREEN_WIDTH, CENTER_Y         - getBaseHeight()/2);
 }
 
 
 void Game::initialiseImages() {
     // Load Background Image
-    if (!backgroundTexture.loadFromFile("assets/images/background-day.png")) {
-        std::cout << "No background Image";
+    
+    if (!baseTexture.loadFromFile("assets/images/base.png")) {
+        std::cout << "Error loading base image." << std::endl;
     }
 
+    baseSprite.setTexture(baseTexture);
+    baseSprite.setPosition(0, SCREEN_HEIGHT - getBaseHeight());
+    
+    if (!backgroundTexture.loadFromFile("assets/images/background-day.png")) {
+        std::cout << "Error loading background Image" << std::endl;
+    }
     backgroundSprite.setTexture(backgroundTexture);
+}
+
+
+float Game::getBaseHeight(){
+    return baseSprite.getLocalBounds().height;
 }

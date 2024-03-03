@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <SFML/Graphics.hpp>
+#include <array> // Include the array header
 
 // Forward declaration for the Game class
 class Game;
@@ -11,10 +12,7 @@ class Obstacle;
 
 class Player {
 public:
-
-    // Updated constructor with a reference to the Game class
     Player(Game& game);
-
 
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
@@ -22,27 +20,24 @@ public:
     bool collidesWith(const sf::FloatRect& rect) const;
     bool collidesWith(const Obstacle& obstacle) const;
 
-    void checkIfTouchingGround();
-    void checkIfTouchingTop();
-    void checkJump();
-
-    bool getIsAlive() const; 
+    bool         getIsAlive() const;
     sf::Vector2f getSize() const;
     sf::Vector2f getPosition() const;
 
 
-    void setColour(const sf::Color& colour);
+    void setTexture(const std::string& filename);
     void sethasCollidedWithObstacle(bool boolean);
     void setPosition(sf::Vector2f vector);
     void setDefaultPosition();
-    void setDefaultColour();
+    //void setDefaultTexture();
 
     void revive();
     void kill();
     void jump();
 
 private:
-    sf::RectangleShape shape;
+    sf::Sprite sprite;
+    sf::Texture texture;
     float velocityY;
     float accelerationY;
 
@@ -54,6 +49,22 @@ private:
 
     // Reference to the Game class
     Game* game;
+
+    // Animation-related members as an array
+    std::array<sf::Texture, 3> animationFrames; // Adjust the size as needed
+    unsigned int currentFrame;
+    float frameDuration;
+    float elapsedTime;
+
+    void loadAnimationFrames();
+    void updateAnimation(float deltaTime);
+
+    void checkIfTouchingGround();
+    void checkIfTouchingTop();
+    void checkJump();
+
+    
+
 };
 
 #endif // PLAYER_H
