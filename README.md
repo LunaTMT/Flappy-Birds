@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 # Flappy Bird
-=======
+
 # Flappy Bird (IN PROGRESS)
->>>>>>> origin/master
+
 
 ## Installation
 
@@ -24,9 +23,6 @@ Then based upon your operating system follow the steps below
 ## Demonstration
 
 Brief demonstration of current working implementation
-<<<<<<< HEAD
-=======
 
-https://github.com/LunaTMT/Flappy-Birds-/assets/44672093/c9b2e7ee-491e-4ed9-98bc-b7f55164581b
 
->>>>>>> origin/master
+
