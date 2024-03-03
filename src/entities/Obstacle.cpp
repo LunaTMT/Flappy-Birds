@@ -3,8 +3,8 @@
 #include "Tube.h"
 
 Obstacle::Obstacle(float x, float y)
-    : top_tube   (std::make_shared<Tube>(x, 0                , TUBE_WIDTH,                  y - HALF_TUBE_GAP , sf::Color::Red)),
-      bottom_tube(std::make_shared<Tube>(x, y + HALF_TUBE_GAP, TUBE_WIDTH, SCREEN_HEIGHT - (y + HALF_TUBE_GAP), sf::Color::Blue)),
+    : top_tube   (std::make_shared<Tube>(x, -(SCREEN_WIDTH - y + HALF_TUBE_GAP) , TUBE_WIDTH,                  y - HALF_TUBE_GAP,  0)),
+      bottom_tube(std::make_shared<Tube>(x,                    y + HALF_TUBE_GAP, TUBE_WIDTH, SCREEN_HEIGHT - (y + HALF_TUBE_GAP), 1)),
       velocityX(-100.0f) {
         isMoving = true;
         beenPassed = false;

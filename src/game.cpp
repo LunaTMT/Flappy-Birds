@@ -74,7 +74,7 @@ void Game::update(float deltaTime) {
 
         if (obstacle.isOutOfBounds()) {
             obstaclesQueue.pop_front();
-            obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(50, SCREEN_HEIGHT - 50));
+            obstaclesQueue.emplace_back(SCREEN_WIDTH + 150, getRandomInt(100, SCREEN_HEIGHT - 100));
         }
     }
 
@@ -111,7 +111,7 @@ void Game::initialiseObstacles() {
 
 void Game::initialiseImages() {
     // Load Background Image
-    if (!backgroundTexture.loadFromFile("assets/images/background-night.png")) {
+    if (!backgroundTexture.loadFromFile("assets/images/background-day.png")) {
         std::cout << "No background Image";
     }
 
